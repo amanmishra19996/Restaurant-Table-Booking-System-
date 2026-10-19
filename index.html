@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurum — Restaurants, Cafes & Reservations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="venues.css">
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loader" class="loader">
+  <div class="loader-inner">
+    <div class="loader-logo">AURUM</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container" class="toast-container"></div>
+
+<!-- Navbar -->
+<nav id="navbar" class="navbar">
+  <div class="nav-container">
+    <a href="#home" class="nav-logo">
+      <span class="logo-mark">✦</span>
+      <span class="logo-text">AURUM</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#restaurants" class="nav-link">Restaurants</a></li>
+      <li><a href="#menu" class="nav-link">Menu</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#reservations" class="nav-link">Reservations</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">☀</span>
+      </button>
+      <a href="#reservations" class="btn-nav-book">Reserve a Table</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+  <div class="hero-bg">
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="particles"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Restaurants · Cafes · Delhi NCR</p>
+    <h1 class="hero-title">
+      <span class="hero-title-line">Where Every</span>
+      <span class="hero-title-line italic">Meal Becomes</span>
+      <span class="hero-title-line">A Memory</span>
+    </h1>
+    <p class="hero-sub">Discover handpicked restaurants and cafes, find them on the map,<br>and reserve your table in a few clicks.</p>
+    <div class="hero-cta">
+      <a href="#restaurants" class="btn-primary">Find a Table</a>
+      <a href="#menu" class="btn-ghost">Explore Menu</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- Restaurants & Cafes -->
+<section id="restaurants" class="section venues-section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Choose Your Venue</p>
+      <h2 class="section-title">Restaurants &amp; Cafes</h2>
+      <p class="section-desc">Pick where you'd like to go. You'll see its exact location on the map, then book a table.</p>
+    </div>
+
+    <div class="venue-filters" id="venueFilters">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="Restaurant">Restaurants</button>
+      <button class="chip" data-filter="Cafe">Cafes</button>
+    </div>
+
+    <div class="venues-grid" id="venuesGrid">
+      <!-- Populated by JS -->
+    </div>
+
+    <!-- Location panel (shown after a venue is selected) -->
+    <div id="locationPanel" class="location-panel hidden">
+      <div class="location-map">
+        <iframe id="locationMap" title="Venue location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+      <div class="location-details" id="locationDetails"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Dishes -->
+<section id="menu" class="section dishes-section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Seasonal Selection</p>
+      <h2 class="section-title">Signature Dishes</h2>
+      <p class="section-desc">Each plate is a dialogue between our kitchen and the season — nothing more, nothing less.</p>
+    </div>
+    <div class="dishes-grid" id="dishesGrid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section about-section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-imagery">
+        <div class="about-img-main">
+          <div class="about-img-placeholder">
+            <div class="chef-silhouette">👨‍🍳</div>
+            <span>Executive Chef Marcus Beaumont</span>
+          </div>
+        </div>
+        <div class="about-img-accent">
+          <div class="about-accent-inner">
+            <span class="accent-year">2008</span>
+            <span class="accent-label">Founded</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-content">
+        <p class="section-eyebrow">Our Story</p>
+        <h2 class="section-title left">Crafted with<br><em>Conviction</em></h2>
+        <p class="about-text">Aurum began as a single table in a borrowed kitchen. Chef Marcus Beaumont, trained under the Michelin-starred kitchens of Lyon and Tokyo, returned home with one conviction: exceptional food belongs to everyone, not only to the privileged few.</p>
+        <p class="about-text">Today, our 40-seat dining room has become a destination — not for its celebrity, but for what happens at the table. Honest conversation, unhurried meals, and the kind of food that stays with you long after the last course.</p>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-number" data-target="16">0</span>
+            <span class="stat-label">Years of Excellence</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="48000">0</span>
+            <span class="stat-suffix">+</span>
+            <span class="stat-label">Guests Welcomed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="11">0</span>
+            <span class="stat-label">Awards & Honours</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox (kept for future gallery use) -->
+<div id="lightbox" class="lightbox">
+  <div class="lightbox-overlay" id="lightboxOverlay"></div>
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+    <button class="lightbox-prev" id="lightboxPrev">‹</button>
+    <div class="lightbox-img-wrap" id="lightboxImgWrap"></div>
+    <button class="lightbox-next" id="lightboxNext">›</button>
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+</div>
+
+<!-- Reservations -->
+<section id="reservations" class="section reservations-section">
+  <div class="container">
+    <div class="section-header light">
+      <p class="section-eyebrow">Join Us</p>
+      <h2 class="section-title">Reserve Your Table</h2>
+      <p class="section-desc">Secure your evening. We recommend booking at least 48 hours in advance for the best table selection.</p>
+    </div>
+
+    <!-- Selected venue banner -->
+    <div class="venue-banner" id="venueBanner"></div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <div class="search-field">
+        <label>Date</label>
+        <input type="date" id="searchDate" class="search-input">
+      </div>
+      <div class="search-field">
+        <label>Time</label>
+        <select id="searchTime" class="search-input">
+          <option value="">Select time</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label>Guests</label>
+        <select id="searchGuests" class="search-input">
+          <option value="">Any size</option>
+          <option>1–2</option><option>3–4</option><option>5–6</option><option>7–8</option><option>9+</option>
+        </select>
+      </div>
+      <button class="btn-primary search-btn" id="searchBtn">Check Availability</button>
+    </div>
+
+    <div class="reservation-layout">
+      <!-- Table Map -->
+      <div class="table-map-section">
+        <div class="map-header">
+          <h3>Dining Room Floor Plan</h3>
+          <div class="map-legend">
+            <span class="legend-item available">Available</span>
+            <span class="legend-item reserved">Reserved</span>
+            <span class="legend-item selected">Selected</span>
+          </div>
+        </div>
+        <div class="floor-plan" id="floorPlan">
+          <!-- Tables rendered by JS -->
+        </div>
+        <div id="tableInfo" class="table-info hidden">
+          <p id="tableInfoText"></p>
+        </div>
+      </div>
+
+      <!-- Booking Form -->
+      <div class="booking-form-section">
+        <form id="bookingForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="guestName">Full Name <span class="req">*</span></label>
+              <input type="text" id="guestName" placeholder="Your name" autocomplete="name">
+              <span class="field-error" id="nameError"></span>
+            </div>
+            <div class="form-group">
+              <label for="guestEmail">Email Address <span class="req">*</span></label>
+              <input type="email" id="guestEmail" placeholder="you@example.com" autocomplete="email">
+              <span class="field-error" id="emailError"></span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="guestPhone">Phone Number <span class="req">*</span></label>
+              <input type="tel" id="guestPhone" placeholder="+91 XXXXX XXXXX" autocomplete="tel">
+              <span class="field-error" id="phoneError"></span>
+            </div>
+            <div class="form-group">
+              <label for="bookingDate">Date <span class="req">*</span></label>
+              <input type="date" id="bookingDate">
+              <span class="field-error" id="dateError"></span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookingTime">Time Slot <span class="req">*</span></label>
+              <select id="bookingTime">
+                <option value="">Select a time</option>
+              </select>
+              <span class="field-error" id="timeError"></span>
+            </div>
+            <div class="form-group">
+              <label for="guestCount">Number of Guests <span class="req">*</span></label>
+              <input type="number" id="guestCount" min="1" max="8" placeholder="1–8">
+              <span class="field-error" id="guestError"></span>
+            </div>
+          </div>
+          <div class="form-group full">
+            <label for="specialRequest">Special Requests</label>
+            <textarea id="specialRequest" rows="3" placeholder="Dietary requirements, celebrations, seating preferences…"></textarea>
+          </div>
+          <div class="form-selected-table" id="selectedTableDisplay">
+            <span id="selectedTableText">No table selected — choose from the floor plan above.</span>
+          </div>
+          <button type="submit" class="btn-primary btn-submit" id="submitBtn">
+            <span class="btn-text">Confirm Reservation</span>
+            <span class="btn-loader hidden">Booking…</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Confirmation Modal -->
+<div id="confirmModal" class="modal">
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-icon">✦</div>
+      <h3>Reservation Confirmed</h3>
+      <p>Your table has been reserved. We look forward to welcoming you.</p>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-countdown">
+      <p>Time until your reservation: <strong id="countdownDisplay">—</strong></p>
+    </div>
+    <div class="modal-footer">
+      <a class="btn-ghost" id="modalDirections" href="#" target="_blank" rel="noopener">📍 Get Directions</a>
+      <button class="btn-primary" id="modalClose">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- Reviews -->
+<section id="reviews" class="section reviews-section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Guest Voices</p>
+      <h2 class="section-title">What They Say</h2>
+    </div>
+    <div class="carousel-wrapper">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Populated by JS -->
+      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section contact-section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Find Us</p>
+      <h2 class="section-title">Visit Aurum</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-block">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h4>Address</h4>
+            <p>12 Chandni Chowk Lane, Connaught Place<br>New Delhi, 110001</p>
+          </div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h4>Reservations</h4>
+            <p>+91 11 4567 8900</p>
+          </div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-icon">✉</div>
+          <div>
+            <h4>Email</h4>
+            <p>reservations@aurum.restaurant</p>
+          </div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <h4>Opening Hours</h4>
+            <p>Tuesday – Sunday<br>Dinner: 18:00 – 22:30<br>Closed Mondays</p>
+          </div>
+        </div>
+      </div>
+      <div class="map-placeholder">
+        <div class="map-inner">
+          <div class="map-pin-animation">
+            <div class="map-pin">📍</div>
+            <div class="map-pulse"></div>
+          </div>
+          <p>Connaught Place, New Delhi</p>
+          <span>Pick a venue above to see its live map</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">✦ AURUM</div>
+        <p>Handpicked restaurants and cafes across Delhi NCR. Reserve your table, find your way, enjoy the evening.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Instagram">IG</a>
+          <a href="#" class="social-link" aria-label="Facebook">FB</a>
+          <a href="#" class="social-link" aria-label="Twitter">TW</a>
+          <a href="#" class="social-link" aria-label="TikTok">TK</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#restaurants">Restaurants</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#reservations">Reservations</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Experience</h5>
+        <ul>
+          <li><a href="#">Private Dining</a></li>
+          <li><a href="#">Wine Programme</a></li>
+          <li><a href="#">Chef's Table</a></li>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">Gift Cards</a></li>
+        </ul>
+      </div>
+      <div class="footer-newsletter">
+        <h5>Stay Connected</h5>
+        <p>Seasonal menus, events, and the occasional behind-the-scenes moment.</p>
+        <div class="newsletter-form">
+          <input type="email" id="newsletterEmail" placeholder="your@email.com">
+          <button class="btn-newsletter" id="newsletterBtn">→</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Aurum. All rights reserved.</p>
+      <p>Privacy Policy · Terms of Service</p>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
