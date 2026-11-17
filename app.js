@@ -68,23 +68,21 @@ function buildTables(zones, reservedIds = []) {
 }
 
 // ---- VENUES ----
-// NOTE: names, addresses, phone numbers and coordinates below are SAMPLE data.
-// Replace each with the real venue details (get lat/lng by right-clicking the place in Google Maps).
 const venues = [
   {
     id: 'The Brew', name: 'The Brew', type: 'Restaurant', cuisine: 'Fine Dining · Modern European',
-    image: 'images/venues/the brew.jpg', rating: 4.9, price: '₹₹₹₹',
+    image: 'images/venues/the-brew.jpg', rating: 4.9,
     area: 'Connaught Place',
     address: '12 Chandni Chowk Lane, Connaught Place, New Delhi, 110001',
     phone: '+91 11 4567 8900',
     lat: 28.6315, lng: 77.2167,
-    hours: 'Tue – Sun · 18:00 – 22:30', closedDays: [1],
+    hours: 'Mon – Sat · 18:00 – 22:30', closedDays: [1],
     slots: makeSlots('18:00', '21:30'),
     tables: buildTables([['Window', [2, 2, 4, 4]], ['Main Floor', [4, 6, 4, 4, 2]], ['Private Room', [8, 6, 4]]], [2, 6, 11]),
   },
   {
     id: 'The Spice Route', name: 'The Spice Route', type: 'Restaurant', cuisine: 'North Indian · Mughlai',
-    image: 'images/venues/spice-route.jpg', rating: 4.6, price: '₹₹₹',
+    image: 'images/venues/spice-route.jpg', rating: 4.6, 
     area: 'Khan Market',
     address: '24 Middle Lane, Khan Market, New Delhi, 110003',
     phone: '+91 11 4123 5500',
@@ -95,7 +93,7 @@ const venues = [
   },
   {
     id: 'Sakura House', name: 'Sakura House', type: 'Restaurant', cuisine: 'Japanese · Sushi & Ramen',
-    image: 'images/venues/sakura-house.jpg', rating: 4.7, price: '₹₹₹',
+    image: 'images/venues/sakura-house.jpg', rating: 4.7, 
     area: 'Cyber Hub, Gurugram',
     address: 'DLF Cyber Hub, Sector 24, Gurugram, Haryana, 122002',
     phone: '+91 124 456 7800',
@@ -106,7 +104,7 @@ const venues = [
   },
   {
     id: 'Brew & Bloom', name: 'Brew & Bloom', type: 'Cafe', cuisine: 'Specialty Coffee · Brunch',
-    image: 'images/venues/brew-bloom.jpg', rating: 4.5, price: '₹₹',
+    image: 'images/venues/brew-bloom.jpg', rating: 4.5, 
     area: 'Hauz Khas Village',
     address: '7 Deer Park Road, Hauz Khas Village, New Delhi, 110016',
     phone: '+91 11 4987 6543',
@@ -116,8 +114,8 @@ const venues = [
     tables: buildTables([['Window Bar', [2, 2, 2]], ['Lounge', [4, 4, 6]], ['Garden', [4, 4, 4, 2]]], [2, 8]),
   },
   {
-    id: 'Chai & Chapter', name: 'Chai & Chapter', type: 'Cafe', cuisine: 'Books · Chai · Bakes',
-    image: 'images/venues/chai-chapter.jpg', rating: 4.4, price: '₹₹',
+    id: 'Chaileela', name: 'Chaileela', type: 'Cafe', cuisine: 'Books · Chai · Bakes',
+    image: 'images/venues/chaileela.jpg', rating: 4.4,
     area: 'Lodhi Colony',
     address: 'Shop 14, Lodhi Colony Market, New Delhi, 110003',
     phone: '+91 11 4300 2211',
@@ -267,9 +265,10 @@ function renderVenues() {
          data-id="${escapeHtml(v.id)}" role="button" tabindex="0"
          aria-label="Select ${escapeHtml(v.name)}">
       <div class="venue-top">
+        <img class="venue-photo" src="${escapeHtml(v.image || '')}" alt="${escapeHtml(v.name)}" loading="lazy" onerror="this.remove()">
         <span class="venue-type">${escapeHtml(v.type)}</span>
         <span class="venue-rating">★ ${v.rating.toFixed(1)}</span>
-        ${v.emoji}
+        ${v.emoji || ''}
       </div>
       <div class="venue-body">
         <h3 class="venue-name">${escapeHtml(v.name)}</h3>
